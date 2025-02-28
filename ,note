@@ -1,0 +1,94 @@
+#!/usr/bin/env python3
+
+import os
+from datetime import datetime
+import subprocess
+import argparse
+
+def get_filename_for_master_file():
+    """Returns the path for the master notes file."""
+    notes_dir = os.path.join(os.path.expanduser("~"), "notes")
+    os.makedirs(notes_dir, exist_ok=True)
+    filename = os.path.join(notes_dir, "notes.txt")
+    return filename
+
+def get_filename_for_today():
+    """Returns the path for today's date-based note file."""
+    today = datetime.now()
+    notes_dir = os.path.join(os.path.expanduser("~"), "notes")
+    year_dir = os.path.join(notes_dir, today.strftime("%Y"))
+    month_dir = os.path.join(year_dir, today.strftime("%B"))  # Full month name
+    os.makedirs(month_dir, exist_ok=True)
+
+    day_of_week = today.strftime("%A")
+    filename = os.path.join(month_dir, f"{today.strftime('%Y-%m-%d')}_{day_of_week}.txt")
+    return filename
+
+def get_filename_for_personal_notes():
+    """
+    Returns the path for the personal notes file.
+    Modify the name or directory structure as desired.
+    """
+    notes_dir = os.path.join(os.path.expanduser("~"), "notes")
+    os.makedirs(notes_dir, exist_ok=True)
+    personal_notes_file = os.path.join(notes_dir, "personal_notes.txt")
+    return personal_notes_file
+
+def open_file_in_editor(filename, view_only=False):
+    """
+    Opens the specified file in Vim. If 'view_only' is True,
+    open it in read-only mode. Otherwise, allow editing.
+    """
+    editor = os.getenv('EDITOR', 'vim')
+    if view_only:
+        # Open in read-only mode with Vim
+        subprocess.call([editor, '+normal GzR', filename])
+    else:
+        subprocess.call([editor, "+normal GzRo", "+startinsert", filename])
+
+def search_todo_items(filename):
+    """
+    Searches for lines containing the '†' character in the specified file.
+    You can replace grep/ack as needed.
+    """
+    subprocess.call(['grep', '†', filename, '--color=always'])
+
+def main():
+    parser = argparse.ArgumentParser(description='Note-taking script with additional personal notes option.')
+    parser.add_argument('-r', action='store_true', help='Open the note in read-only mode without adding a new entry.')
+    parser.add_argument('--todo', action='store_true', help='Search for TODO items marked with † in the notes file.')
+    parser.add_argument('--personal', action='store_true', help='Use the personal notes file instead of the master file.')
+    args = parser.parse_args()
+
+    # Decide which file to work with based on --personal
+    if args.personal:
+        filename = get_filename_for_personal_notes()
+    else:
+        filename = get_filename_for_master_file()
+
+    file_exists = os.path.isfile(filename)
+
+    # Handle TODO search
+    if args.todo:
+        search_todo_items(filename)
+        return
+
+    # If not read-only, append a new time-stamped note entry
+    if not args.r:
+        with open(filename, 'a') as file:
+            if not file_exists:
+                print(f"Creating new file: {filename}")
+            date = datetime.now().date().strftime("%Y-%m-%d")
+            current_time = datetime.now().strftime("%I:%M %p")
+            day_of_week = datetime.now().strftime("%a").upper()
+            entry = f"[{date} {day_of_week} {current_time}] - Note entry\n"
+            # Add a blank line before new entry if the file already existed
+            if file_exists:
+                entry = "\n" + entry
+            file.write(entry)
+
+    # Finally, open the file (read-only or editable)
+    open_file_in_editor(filename, view_only=args.r)
+
+if __name__ == "__main__":
+    main()
