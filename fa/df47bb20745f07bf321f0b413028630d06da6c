@@ -1,0 +1,19 @@
+notes.vim
+  s_a4428cf5cbf51c::t_a6ac810b05724b 10
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "fadf47bb20745f07bf321f0b413028630d06da6c",
+  "prompts": {},
+  "sessions": {
+    "s_a4428cf5cbf51c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d42d12d3-c1f8-4da0-8ec8-ff312e2425cd",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Andrew Parmar <andrew.parmar@gmail.com>"
+    }
+  }
+}
