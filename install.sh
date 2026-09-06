@@ -1,11 +1,17 @@
 #!/bin/bash
 
-# Set permissions for the note taker script
-chmod +x ,note
+NOTE_DIR="$HOME/Development/note"
+NOTES_DIR="$HOME/Documents/notes"
 
-# Move the script to ~/bin/note
+# Set permissions for the scripts
+chmod +x "$NOTE_DIR/,note"
+chmod +x "$NOTE_DIR/git_auto_commit.sh"
+
+# Symlink the script into ~/bin (idempotent - skip if already linked)
 mkdir -p ~/bin
-ln -s ~/notes/,note ~/bin/,note
+if [ ! -e ~/bin/,note ]; then
+    ln -s "$NOTE_DIR/,note" ~/bin/,note
+fi
 
 # Ensure ~/bin is in PATH
 if [[ ":$PATH:" != *":$HOME/bin:"* ]]; then
@@ -14,7 +20,7 @@ if [[ ":$PATH:" != *":$HOME/bin:"* ]]; then
 fi
 
 # Update the cron job
-(crontab -l 2>/dev/null; echo "59 23 * * * $HOME/notes/git_auto_commit.sh >> $HOME/notes/git_auto_commit.log 2>&1") | crontab -
+(crontab -l 2>/dev/null; echo "59 23 * * * $NOTE_DIR/git_auto_commit.sh >> $NOTES_DIR/git_auto_commit.log 2>&1") | crontab -
 
-echo "Installation complete. Use `,note` to run the script."
+echo 'Installation complete. Use ,note to run the script.'
 
