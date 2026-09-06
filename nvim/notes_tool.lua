@@ -10,12 +10,12 @@ end
 
 function M.setup()
   vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-    pattern = {
-      "*/Documents/notes/notes.txt",
-      "*/Documents/notes/personal_notes.txt",
-    },
+    pattern = "*",
     callback = function()
-      vim.bo.filetype = "notes"
+      local real_path = vim.fn.resolve(vim.fn.expand("%:p"))
+      if real_path == NOTES_DIR .. "/notes.txt" or real_path == NOTES_DIR .. "/personal_notes.txt" then
+        vim.bo.filetype = "notes"
+      end
     end,
   })
 
