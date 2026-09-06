@@ -45,6 +45,10 @@ pass "~/bin/,note symlinked to \$NOTE_DIR/,note"
 grep -q "git_auto_commit.sh" "$CRONTAB_CAPTURE" || fail "cron line not installed"
 pass "cron line installed"
 
+grep -q "Library/Logs/note-auto-commit.log" "$CRONTAB_CAPTURE" || fail "cron log path is not outside the notes repo"
+grep -q "Documents/notes" "$CRONTAB_CAPTURE" && fail "cron log path still points inside the notes repo"
+pass "cron log path is outside the notes repo"
+
 [ ! -f "$SENTINEL_FILE" ] || fail "install.sh executed \`,note\` via unintended command substitution"
 pass "install.sh does not execute ,note as a side effect"
 
@@ -52,6 +56,15 @@ pass "install.sh does not execute ,note as a side effect"
 bash "$NOTE_DIR/install.sh" >/dev/null
 [ -L "$TMP_HOME/bin/,note" ] || fail "symlink broken after second install run"
 pass "install.sh is idempotent"
+
+# simulate a leftover dangling symlink from migrating from the old layout,
+# and confirm install.sh repairs it instead of leaving it broken
+rm -f "$TMP_HOME/bin/,note"
+ln -s "$NOTE_DIR/does-not-exist" "$TMP_HOME/bin/,note"
+bash "$NOTE_DIR/install.sh" >/dev/null
+[ -L "$TMP_HOME/bin/,note" ] || fail "dangling symlink was not repaired to a symlink"
+[ "$(readlink "$TMP_HOME/bin/,note")" = "$NOTE_DIR/,note" ] || fail "dangling symlink was not repaired to the correct target"
+pass "install.sh repairs a dangling ~/bin/,note symlink"
 
 rm -rf "$TMP_HOME"
 echo "All tests passed."
