@@ -5,23 +5,12 @@ from datetime import datetime
 import subprocess
 import argparse
 
+NOTES_DIR = os.path.join(os.path.expanduser("~"), "Documents", "notes")
+
 def get_filename_for_master_file():
     """Returns the path for the master notes file."""
-    notes_dir = os.path.join(os.path.expanduser("~"), "notes")
-    os.makedirs(notes_dir, exist_ok=True)
-    filename = os.path.join(notes_dir, "notes.txt")
-    return filename
-
-def get_filename_for_today():
-    """Returns the path for today's date-based note file."""
-    today = datetime.now()
-    notes_dir = os.path.join(os.path.expanduser("~"), "notes")
-    year_dir = os.path.join(notes_dir, today.strftime("%Y"))
-    month_dir = os.path.join(year_dir, today.strftime("%B"))  # Full month name
-    os.makedirs(month_dir, exist_ok=True)
-
-    day_of_week = today.strftime("%A")
-    filename = os.path.join(month_dir, f"{today.strftime('%Y-%m-%d')}_{day_of_week}.txt")
+    os.makedirs(NOTES_DIR, exist_ok=True)
+    filename = os.path.join(NOTES_DIR, "notes.txt")
     return filename
 
 def get_filename_for_personal_notes():
@@ -29,9 +18,8 @@ def get_filename_for_personal_notes():
     Returns the path for the personal notes file.
     Modify the name or directory structure as desired.
     """
-    notes_dir = os.path.join(os.path.expanduser("~"), "notes")
-    os.makedirs(notes_dir, exist_ok=True)
-    personal_notes_file = os.path.join(notes_dir, "personal_notes.txt")
+    os.makedirs(NOTES_DIR, exist_ok=True)
+    personal_notes_file = os.path.join(NOTES_DIR, "personal_notes.txt")
     return personal_notes_file
 
 def open_file_in_editor(filename, view_only=False):
