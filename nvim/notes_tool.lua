@@ -23,6 +23,18 @@ function M.setup()
     pattern = "notes",
     callback = function(args)
       vim.keymap.set("n", "<leader>t", M.insert_timestamp, { buffer = args.buf, desc = "Insert note timestamp" })
+      -- Setting filetype doesn't reliably load the syntax file during
+      -- LazyVim's startup autocmd chain (a later Syntax/filetype pass can
+      -- clobber it). Defer the load past the whole chain and source it
+      -- explicitly, clearing the reload guard first.
+      vim.schedule(function()
+        if vim.api.nvim_buf_is_valid(args.buf) then
+          vim.api.nvim_buf_call(args.buf, function()
+            vim.b.current_syntax = nil
+            vim.cmd("runtime! syntax/notes.vim")
+          end)
+        end
+      end)
     end,
   })
 end
