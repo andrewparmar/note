@@ -1,0 +1,19 @@
+nvim/notes_tool.lua
+  s_a4428cf5cbf51c::t_dca3d0c4c8224d 13,15-18
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "4146b29c4e1ed4d0e19ba2a5c058b2aab4b967ec",
+  "prompts": {},
+  "sessions": {
+    "s_a4428cf5cbf51c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d42d12d3-c1f8-4da0-8ec8-ff312e2425cd",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Andrew Parmar <andrew.parmar@gmail.com>"
+    }
+  }
+}
