@@ -1,0 +1,21 @@
+docs/superpowers/plans/2026-09-06-note-notes-separation-plan.md
+  s_a4428cf5cbf51c::t_f30a172fa72bdb 1-716
+docs/superpowers/specs/2026-09-06-note-notes-separation-design.md
+  s_a4428cf5cbf51c::t_7a3673141e0140 1-164
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "b4869e3d6f614b438ce37e708401d4af7deb873b",
+  "prompts": {},
+  "sessions": {
+    "s_a4428cf5cbf51c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d42d12d3-c1f8-4da0-8ec8-ff312e2425cd",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Andrew Parmar <andrew.parmar@gmail.com>"
+    }
+  }
+}
