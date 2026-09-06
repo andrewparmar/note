@@ -7,7 +7,7 @@ endif
 " Match text inside square brackets and assign it to the NoteDate group; set
 " to red
 syntax match NoteDate /^\[[^]]*\]/
-highlight NoteDate ctermfg=LightBlue guifg=#add8e6
+highlight NoteDate ctermfg=214 guifg=#ff9e64 gui=bold cterm=bold
 
 " Match lines starting with '-†' and assign to 'TodoItem' group
 syntax match TodoItem /^\s*-†.*$/
