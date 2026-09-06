@@ -1,0 +1,24 @@
+tests/test_notes_tool.sh
+  s_a4428cf5cbf51c::t_e8a78f88064e97 23
+  s_a4428cf5cbf51c::t_487d985fcc6de5 9-14,16
+  s_a4428cf5cbf51c::t_5d6b653ec65844 22
+  s_a4428cf5cbf51c::t_5981efb5af23fa 21
+nvim/notes_tool.lua
+  s_a4428cf5cbf51c::t_c11cbdc5080f8f 26-37
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "f80486856fac9ce8cc124354f571514996fe32c9",
+  "prompts": {},
+  "sessions": {
+    "s_a4428cf5cbf51c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d42d12d3-c1f8-4da0-8ec8-ff312e2425cd",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Andrew Parmar <andrew.parmar@gmail.com>"
+    }
+  }
+}
