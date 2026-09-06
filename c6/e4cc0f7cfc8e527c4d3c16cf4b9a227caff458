@@ -1,0 +1,32 @@
+tests/test_git_auto_commit.sh
+  s_a4428cf5cbf51c::t_d451d900be2da5 40-45
+  s_a4428cf5cbf51c::t_3c1b61ddefd996 38-39,54
+  s_a4428cf5cbf51c::t_6c5ed9eead738d 15-18
+install.sh
+  s_a4428cf5cbf51c::t_ea156d775c6db6 10-11,13
+  s_a4428cf5cbf51c::t_87e0f57e9e595d 21-24
+README.md
+  s_a4428cf5cbf51c::t_971dc4c894f421 6,11-14,16,18-19,21-24,26-28,31-33
+tests/test_install.sh
+  s_a4428cf5cbf51c::t_e8f6e2a26849b2 48-51
+  s_a4428cf5cbf51c::t_341f88e108de12 60-68
+git_auto_commit.sh
+  s_a4428cf5cbf51c::t_165c38cf6227f5 17-19
+  s_a4428cf5cbf51c::t_f89d67ba3c6e9c 20
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "c6e4cc0f7cfc8e527c4d3c16cf4b9a227caff458",
+  "prompts": {},
+  "sessions": {
+    "s_a4428cf5cbf51c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d42d12d3-c1f8-4da0-8ec8-ff312e2425cd",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Andrew Parmar <andrew.parmar@gmail.com>"
+    }
+  }
+}
