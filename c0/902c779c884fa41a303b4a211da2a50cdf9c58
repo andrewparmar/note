@@ -1,0 +1,19 @@
+docs/superpowers/specs/2026-09-06-note-notes-separation-design.md
+  s_a4428cf5cbf51c::t_2cadec41267138 1-102
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "c0902c779c884fa41a303b4a211da2a50cdf9c58",
+  "prompts": {},
+  "sessions": {
+    "s_a4428cf5cbf51c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d42d12d3-c1f8-4da0-8ec8-ff312e2425cd",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Andrew Parmar <andrew.parmar@scribehow.com>"
+    }
+  }
+}
