@@ -23,6 +23,11 @@ function M.setup()
     pattern = "notes",
     callback = function(args)
       vim.keymap.set("n", "<leader>t", M.insert_timestamp, { buffer = args.buf, desc = "Insert note timestamp" })
+      -- Vim's default 'comments' treats "-" and "•" as bullet-list leaders,
+      -- so <CR> after a "- item" line auto-aligns the new line to the text
+      -- past the bullet instead of the bullet's own column. Clear it so
+      -- <CR> just falls back to plain autoindent (same column as "-").
+      vim.bo[args.buf].comments = ""
       -- Setting filetype doesn't reliably load the syntax file during
       -- LazyVim's startup autocmd chain (a later Syntax/filetype pass can
       -- clobber it). Defer the load past the whole chain and source it
